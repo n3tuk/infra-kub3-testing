@@ -1,0 +1,13 @@
+{
+  "name": "infra-minikube",
+  "description": "A Terraform and Flux-based repository for quickly deploying local Kubernetes clusters with standardised configuration and service deployments",
+  "license": "MIT",
+  "engines": {
+    "//": "lts/Iron",
+    "node": "^20"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.4"
+  },
+  "dependencies": {}
+}

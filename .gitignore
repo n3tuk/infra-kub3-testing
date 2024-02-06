@@ -1,0 +1,16 @@
+# Ignore any Node-related temporary files
+node_modules
+
+# Ignore taskfile processing directory
+.task
+
+# Ignore temporary Terraform files and directories
+terraform/.terraform
+
+# Ignore the prettier cache
+.prettier.cache
+
+# Ignore Terraform state files
+*.tfstate
+*.tfstate.backup
+*.tfplan

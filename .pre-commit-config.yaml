@@ -1,0 +1,50 @@
+---
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks.git
+    rev: v4.5.0
+    hooks:
+      - id: no-commit-to-branch
+        name: Check this commit is not to the main/master branch
+      - id: check-merge-conflict
+        name: Check for merge conflicts before committing
+      - id: check-case-conflict
+        name: Check for case conflicts for case-sensitive filesystems
+      - id: check-symlinks
+        name: Check for broken syslinks in the repository
+      - id: destroyed-symlinks
+        name: Check for destroyed symlinks in the repository
+      - id: check-added-large-files
+        name: Check no large files have been added to the commit
+      - id: trailing-whitespace
+        name: Check all trailing whitespace is removed
+      - id: end-of-file-fixer
+        name: Check all files end in a new-line only
+      - id: forbid-submodules
+        name: Check no git submodules are added to the repository
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        name: Run prettier to check and format files
+        types_or: [json, yaml, markdown]
+
+  - repo: https://github.com/golangci/golangci-lint.git
+    rev: v1.55.2
+    hooks:
+      - id: golangci-lint-full
+        name: Run Go linters across function/ source files
+        files: ^function/
+        entry: bash -c 'cd function/ && golangci-lint run --fix --config=../.golangci.yaml --path-prefix=function'
+      - id: golangci-lint-full
+        name: Run Go linters across infra/ source files
+        files: ^infra/
+        entry: bash -c 'cd infra/ && golangci-lint run --fix --config=../.golangci.yaml --path-prefix=infra'
+
+  - repo: https://github.com/python-jsonschema/check-jsonschema.git
+    rev: 0.27.4
+    hooks:
+      - id: check-dependabot
+        name: Check the Dependabot configuration for correctness
+      - id: check-github-workflows
+        name: Check the GitHub Workflows for correctness
