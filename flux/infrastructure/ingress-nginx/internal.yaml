@@ -1,0 +1,76 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ingress-nginx-internal
+  namespace: ingress-system
+spec:
+  chart:
+    spec:
+      chart: ingress-nginx
+      version: '>=4.9.0 <5.0.0'
+      sourceRef:
+        kind: HelmRepository
+        name: ingress-nginx
+        namespace: flux-system
+      interval: 1m
+  interval: 5m
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+  test:
+    enable: true
+  values:
+    controller:
+      replicaCount: 2
+
+      ingressClass: nginx-internal
+      ingressClassResource:
+        name: nginx-internal
+        controllerValue: 'k8s.io/ingress-nginx-internal'
+        enabled: true
+        default: false
+
+      updateStrategy:
+        rollingUpdate:
+          maxSurge: 1
+          maxUnavailable: 0
+        type: RollingUpdate
+
+      resources:
+        requests:
+          cpu: 100m
+          memory: 96Mi
+
+      service:
+        enabled: true
+        externalTrafficPolicy: Local
+
+      metrics:
+        enabled: true
+
+      config:
+        use-forwarded-headers: 'true'
+        forwarded-for-header: X-Forwarded-For
+        compute-full-forwarded-for: 'false'
+        enable-real-ip: 'true'
+        proxy-real-ip-cidr: '0.0.0.0/0'
+        use-proxy-protocol: 'false'
+        use-http2: 'true'
+        ssl-ciphers: EECDH+AESGCM:EECDH+AES256
+        ssl-protocols: TLSv1.3 TLSv1.2
+        ssl-session-cache: 'true'
+        ssl-session-cache-size: 5m
+        ssl-session-timeout: 15m
+        ssl-ecdh-curve: secp521r1:secp384r1
+        hsts: 'true'
+        hsts-include-subdomains: 'true'
+        hsts-max-age: 10800
+
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/instance: ingress-nginx-internal
