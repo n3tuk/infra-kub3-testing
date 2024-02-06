@@ -16,7 +16,7 @@ provider "flux" {
   }
 
   git = {
-    url = "ssh://git@github.com/n3tuk/infra-minikube.git"
+    url = "ssh://git@github.com/n3tuk/infra-minikub3.git"
     ssh = {
       username    = "git"
       private_key = tls_private_key.flux.private_key_pem

@@ -41,3 +41,7 @@ provider "google" {
     owner       = "jonathan-wright"
   }
 }
+
+provider "github" {
+  owner = "n3tuk"
+}
