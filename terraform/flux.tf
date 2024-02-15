@@ -1,18 +1,12 @@
 provider "kubernetes" {
-  host = minikube_cluster.kub3.host
-
-  client_certificate     = minikube_cluster.kub3.client_certificate
-  client_key             = minikube_cluster.kub3.client_key
-  cluster_ca_certificate = minikube_cluster.kub3.cluster_ca_certificate
+  config_path    = var.kube_config
+  config_context = var.kube_context
 }
 
 provider "flux" {
   kubernetes = {
-    host = minikube_cluster.kub3.host
-
-    client_certificate     = minikube_cluster.kub3.client_certificate
-    client_key             = minikube_cluster.kub3.client_key
-    cluster_ca_certificate = minikube_cluster.kub3.cluster_ca_certificate
+    config_path    = var.kube_config
+    config_context = var.kube_context
   }
 
   git = {
@@ -22,13 +16,13 @@ provider "flux" {
       private_key = tls_private_key.flux.private_key_pem
     }
 
-    author_name  = "n3t.uk Flux"
-    author_email = "flux+kub3-${random_pet.tag.id}@n3t.uk"
+    author_name  = "${local.hostname} Flux"
+    author_email = "flux+${local.hostname}@n3t.uk"
   }
 }
 
 resource "flux_bootstrap_git" "this" {
-  path = "flux/clusters/kub3-${random_pet.tag.id}"
+  path = "flux/clusters/kub3/${local.region}/${local.environment}/${local.cluster}"
 
   depends_on = [
     github_repository_deploy_key.flux

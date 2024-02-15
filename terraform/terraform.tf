@@ -2,13 +2,9 @@ terraform {
   required_version = "~> 1.7.0"
 
   required_providers {
-    random = {
-      source  = "hashicorp/random"
-      version = "~> 3.6.0"
-    }
-    minikube = {
-      source  = "scott-the-programmer/minikube"
-      version = "~> 0.3.9"
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "4.23.0"
     }
     github = {
       source  = "integrations/github"
@@ -44,4 +40,8 @@ provider "google" {
 
 provider "github" {
   owner = "n3tuk"
+}
+
+provider "cloudflare" {
+
 }
