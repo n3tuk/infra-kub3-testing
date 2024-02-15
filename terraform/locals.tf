@@ -10,4 +10,19 @@ locals {
     t = "testing"
     s = "services"
   }
+
+  cloudflare_domains = [
+    "kub3.uk",
+    "pip3.uk",
+    "sit3.uk",
+    "liv3.uk",
+    "t3st.uk",
+  ]
+
+  cloudflare_ip = [
+    "82.69.106.64/32",
+    "2a02:8010:8006::/48",
+    "46.235.225.59/32",
+    "2a00:1098:0:82:1000:a:ea:b72c/128",
+  ]
 }

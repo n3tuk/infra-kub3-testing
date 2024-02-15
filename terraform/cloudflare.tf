@@ -1,18 +1,10 @@
-# annotations:
-#   external-dns.alpha.kubernetes.io/target: <guid>.cfargotunnel.com
-#   external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
+data "cloudflare_api_token_permission_groups" "all" {}
 
-# data "cloudflare_accounts" "n3tuk" {
-#   name = "n3tuk"
-# }
+data "cloudflare_accounts" "n3tuk" {
+  name = "n3tuk"
+}
 
-# resource "random_string" "tunnel" {
-#   length  = 32
-#   special = false
-# }
-
-# resource "cloudflare_tunnel" "minikube" {
-#   account_id = data.cloudflare_tunnel.n3tuk.id
-#   name       = "n3tuk-minikub3-${random_pet.tag.id}"
-#   secret     = base64encode(random_string.tunnel.id)
-# }
+data "cloudflare_zone" "n3tuk" {
+  for_each = toset(local.cloudflare_domains)
+  name     = each.value
+}
