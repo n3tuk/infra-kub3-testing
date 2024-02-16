@@ -5,4 +5,5 @@ resources:
   - ingress-nginx.yaml
   - external-dns.yaml
   - cloudflare.yaml
+  - metallb.yaml
   - podinfo.yaml
