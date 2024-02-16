@@ -32,6 +32,9 @@ spec:
         - hostname: '*.kub3.uk'
           service: http://ingress-nginx-external-controller.ingress-system.svc.cluster.local.
 
+    image:
+      tag: 2024.2.0
+
     replicaCount: 2
     resources:
       requests:
