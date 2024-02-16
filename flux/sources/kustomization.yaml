@@ -4,4 +4,5 @@ kind: Kustomization
 resources:
   - ingress-nginx.yaml
   - external-dns.yaml
+  - cloudflare.yaml
   - podinfo.yaml

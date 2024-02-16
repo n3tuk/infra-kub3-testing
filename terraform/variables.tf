@@ -9,3 +9,9 @@ variable "kube_context" {
   type        = string
   default     = "admin@minikube-01"
 }
+
+variable "cloudflare_account_id" {
+  description = "The Account ID for the Cloudflare account to be used"
+  type        = string
+  default     = "e0d4aae3f32f077cd16bbc26f615738d"
+}
