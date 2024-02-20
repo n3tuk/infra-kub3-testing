@@ -10,7 +10,7 @@ provider "flux" {
   }
 
   git = {
-    url = "ssh://git@github.com/n3tuk/infra-minikub3.git"
+    url = "ssh://github.com/${data.github_repository.infra_kub3_testing.full_name}.git"
     ssh = {
       username    = "git"
       private_key = tls_private_key.flux.private_key_pem
@@ -21,7 +21,7 @@ provider "flux" {
   }
 }
 
-resource "flux_bootstrap_git" "this" {
+resource "flux_bootstrap_git" "kub3" {
   path = "flux/clusters/kub3/${local.region}/${local.environment}/${local.cluster}"
 
   depends_on = [

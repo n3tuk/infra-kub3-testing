@@ -1,5 +1,5 @@
 {
-  "name": "infra-minikube",
+  "name": "infra-kub3-testing",
   "description": "A Terraform and Flux-based repository for quickly deploying local Kubernetes clusters with standardised configuration and service deployments",
   "license": "MIT",
   "engines": {

@@ -1,5 +1,5 @@
-data "github_repository" "infra_minikub3" {
-  full_name = "n3tuk/infra-minikub3"
+data "github_repository" "infra_kub3_testing" {
+  full_name = "n3tuk/infra-kub3-testing"
 }
 
 resource "tls_private_key" "flux" {
@@ -9,7 +9,7 @@ resource "tls_private_key" "flux" {
 
 resource "github_repository_deploy_key" "flux" {
   title      = "${local.hostname} Deployment Key for Flux"
-  repository = data.github_repository.infra_minikub3.name
+  repository = data.github_repository.infra_kub3_testing.name
   key        = tls_private_key.flux.public_key_openssh
   read_only  = "false"
 }

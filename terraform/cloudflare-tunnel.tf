@@ -10,11 +10,11 @@ resource "random_password" "tunnel" {
 # Cluster, and then configure the namespace and additional configuration
 # directly into the Cluster
 
-resource "cloudflare_tunnel" "minikube" {
+resource "cloudflare_tunnel" "kub3" {
   account_id = var.cloudflare_account_id
   config_src = "cloudflare"
 
-  name   = "n3tuk-${local.cluster}"
+  name   = "kub3-${local.cluster}"
   secret = base64sha256(random_password.tunnel.result)
 }
 
@@ -37,7 +37,7 @@ resource "kubernetes_secret_v1" "cloudflare_system_cloudflare_credentials" {
       AccountTag   = var.cloudflare_account_id
       TunnelSecret = base64sha256(random_password.tunnel.result)
       TunnelName   = "n3tuk-${local.cluster}"
-      TunnelID     = cloudflare_tunnel.minikube.id
+      TunnelID     = cloudflare_tunnel.kub3.id
     })
   }
 }

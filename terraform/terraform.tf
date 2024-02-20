@@ -26,7 +26,7 @@ terraform {
 
   backend "gcs" {
     bucket = "n3tuk-genuine-caiman-terraform-states"
-    prefix = "github/n3tuk/infra-minikub3"
+    prefix = "github/n3tuk/infra-kub3-testing"
   }
 }
 
