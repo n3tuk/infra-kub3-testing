@@ -1,18 +1,21 @@
-# n3t.uk mini-kub3 Configuration
+# n3t.uk k3s Testing Clusters Configuration
 
 This repository provides a simple Terraform configuration to allow it to build a
-[`minikube`][minikube]-based Kubernetes cluster with Flux, hosted in GitHub, to
-provide GitOps for standardised configuration and service deployments, and
-connected with Cloudflare for DNS and ingress tunnels.
+[`k3s`][k3s]-based Kubernetes cluster with Flux, hosted in GitHub, to provide
+GitOps for standardised configuration and service deployments, and connected
+with Cloudflare for DNS and ingress tunnels.
 
-[minikube]: https://minikube.sigs.k8s.io/docs/
+[k3s]: https://k3s.io
 
 > [!NOTE]
-> This repository was originally designed to deploy and manage minikube clusters
-> locally. However, I have found that minikube and laptop batteries do not work
-> well together. As such I have refactored this configuration to operate on my
-> laptop but not deploy there. Instead `terraform` will deploy and manage a
-> minikube cluster on a remote virtual machine hosted within my lab environment.
+> This repository is not responsible for deploying the base configuration for
+> each k3s Cluster; that is managed through the [`ansible`][ansible] repository
+> instead. Once the Cluster is started and running, then this Terraform
+> configuration will deploy standard `ConfigMap` and `Secret` resources, and
+> bootstrap [`fluxcd`][fluxcd] on to the Cluster.
+
+[ansible]: https://github.com/n3tuk/ansible
+[fluxcd]: https://fluxcd.io
 
 ## Usage
 
