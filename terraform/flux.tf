@@ -1,12 +1,12 @@
 provider "kubernetes" {
   config_path    = var.kube_config
-  config_context = var.kube_context
+  config_context = terraform.workspace
 }
 
 provider "flux" {
   kubernetes = {
     config_path    = var.kube_config
-    config_context = var.kube_context
+    config_context = terraform.workspace
   }
 
   git = {
