@@ -24,7 +24,7 @@ spec:
     installCRDs: true
 
     dns01RecursiveNameservers:
-      - https://dns.google/dns-query
+      - https://cloudflare-dns.com:443/dns-query
     dns01RecursiveNameserversOnly: true
 
     strategy:
