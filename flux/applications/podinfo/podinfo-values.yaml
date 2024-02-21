@@ -1,0 +1,19 @@
+---
+replicaCount: 2
+
+ingress:
+  enabled: true
+  className: nginx-external
+  annotations:
+    nginx.ingress.kubernetes.io/service-upstream: 'true'
+    nginx.ingress.kubernetes.io/upstream-vhost: podinfo.app-podinfo.svc.cluster.local
+  hosts:
+    - host: podinfo-testing-01.t3st.uk
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 16Mi

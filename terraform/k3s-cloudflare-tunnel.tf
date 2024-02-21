@@ -12,19 +12,10 @@ resource "random_pet" "tunnel" {
 
 resource "cloudflare_tunnel" "kub3" {
   account_id = var.cloudflare_account_id
-  config_src = "cloudflare"
+  config_src = "local"
 
   name   = "kub3-${local.cluster}"
   secret = base64sha256(random_password.tunnel.result)
-}
-
-resource "cloudflare_record" "kub3_tunnel" {
-  zone_id = data.cloudflare_zone.n3tuk["kub3.uk"].zone_id
-  name    = "${random_pet.tunnel.id}.tunnel"
-  comment = "Cloudflare Tunnel DNS alias for ${terraform.workspace}"
-
-  type  = "CNAME"
-  value = cloudflare_tunnel.kub3.cname
 }
 
 resource "kubernetes_namespace_v1" "cloudflare_system" {
@@ -33,10 +24,10 @@ resource "kubernetes_namespace_v1" "cloudflare_system" {
   }
 }
 
-resource "kubernetes_secret_v1" "cloudflare_system_cloudflare_credentials" {
+resource "kubernetes_secret_v1" "cloudflare_system_tunnel_credentials" {
   metadata {
-    name      = "cloudflared-credentials"
-    namespace = "cloudflare-system"
+    name      = "tunnel-credentials"
+    namespace = kubernetes_namespace_v1.cloudflare_system.metadata[0].name
   }
 
   type = "Opaque"
@@ -45,10 +36,24 @@ resource "kubernetes_secret_v1" "cloudflare_system_cloudflare_credentials" {
     "credentials.json" = jsonencode({
       AccountTag   = var.cloudflare_account_id
       TunnelSecret = base64sha256(random_password.tunnel.result)
-      TunnelName   = "n3tuk-${local.cluster}"
+      TunnelName   = "kub3-${local.cluster}"
       TunnelID     = cloudflare_tunnel.kub3.id
     })
   }
+}
 
-  depends_on = [kubernetes_namespace_v1.cloudflare_system]
+resource "kubernetes_config_map_v1" "cloudflare_system_tunnel_overrides" {
+  metadata {
+    name      = "tunnel-overrides"
+    namespace = kubernetes_namespace_v1.cloudflare_system.metadata[0].name
+  }
+
+  data = {
+    "values.yaml" = yamlencode({
+      cloudflare = {
+        tunnelName = cloudflare_tunnel.kub3.cname
+        secretName = kubernetes_secret_v1.cloudflare_system_tunnel_credentials.metadata[0].name
+      }
+    })
+  }
 }

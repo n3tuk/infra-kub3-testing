@@ -1,0 +1,25 @@
+---
+replicaCount: 2
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+image:
+  tag: 2024.2.1
+
+cloudflare:
+  ingress:
+    # Configure this tunnel to forward all n3t.uk domains' traffic to the
+    # nginx-external which will process traffic from external sources
+    - hostname: '*.kub3.uk'
+      service: http://ingress-nginx-external-controller.ingress-system
+    - hostname: '*.pip3.uk'
+      service: http://ingress-nginx-external-controller.ingress-system
+    - hostname: '*.t3st.uk'
+      service: http://ingress-nginx-external-controller.ingress-system
+    - hostname: '*.sit3.uk'
+      service: http://ingress-nginx-external-controller.ingress-system
+    - hostname: '*.liv3.uk'
+      service: http://ingress-nginx-external-controller.ingress-system
+    - hostname: '*.n3t.uk'
+      service: http://ingress-nginx-external-controller.ingress-system
