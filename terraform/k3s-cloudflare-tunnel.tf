@@ -49,4 +49,6 @@ resource "kubernetes_secret_v1" "cloudflare_system_cloudflare_credentials" {
       TunnelID     = cloudflare_tunnel.kub3.id
     })
   }
+
+  depends_on = [kubernetes_namespace_v1.cloudflare_system]
 }

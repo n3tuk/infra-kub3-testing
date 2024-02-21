@@ -19,3 +19,24 @@ resource "cloudflare_api_token" "dns_tls" {
     }
   }
 }
+
+resource "kubernetes_namespace_v1" "certificates_system" {
+  metadata {
+    name = "certificates-system"
+  }
+}
+
+resource "kubernetes_secret_v1" "certificates_system_cloudflare_token" {
+  metadata {
+    name      = "cloudflare-token"
+    namespace = "certificates-system"
+  }
+
+  type = "Opaque"
+
+  data = {
+    "api-token" = cloudflare_api_token.external_dns.value
+  }
+
+  depends_on = [kubernetes_namespace_v1.certificates_system]
+}
