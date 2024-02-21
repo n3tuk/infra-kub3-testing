@@ -1,0 +1,18 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: applications
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: sources
+    - name: infrastructure
+    - name: certificates
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  interval: 1m
+  path: flux/applications
+  prune: true
+  validation: client
