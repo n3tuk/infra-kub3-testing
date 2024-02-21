@@ -7,7 +7,8 @@ metadata:
 spec:
   chart:
     spec:
-      chart: charts/podinfo
+      chart: podinfo
+      version: '~> 6.5.0'
       sourceRef:
         kind: HelmRepository
         name: podinfo
