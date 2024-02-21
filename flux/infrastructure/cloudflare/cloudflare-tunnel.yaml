@@ -23,13 +23,23 @@ spec:
 
   values:
     cloudflare:
-      tunnelName: n3tuk-minikube-01
+      tunnelName: kub3-testing-01
       # This Secret is created by Terraform
       secretName: cloudflared-credentials
       ingress:
         # Configure this tunnel to forward all .kube.uk traffic to the
         # nginx-external which will process traffic from external sources
         - hostname: '*.kub3.uk'
+          service: http://ingress-nginx-external-controller.ingress-system.svc.cluster.local.
+        - hostname: '*.pip3.uk'
+          service: http://ingress-nginx-external-controller.ingress-system.svc.cluster.local.
+        - hostname: '*.t3st.uk'
+          service: http://ingress-nginx-external-controller.ingress-system.svc.cluster.local.
+        - hostname: '*.sit3.uk'
+          service: http://ingress-nginx-external-controller.ingress-system.svc.cluster.local.
+        - hostname: '*.liv3.uk'
+          service: http://ingress-nginx-external-controller.ingress-system.svc.cluster.local.
+        - hostname: '*.n3t.uk'
           service: http://ingress-nginx-external-controller.ingress-system.svc.cluster.local.
 
     image:
