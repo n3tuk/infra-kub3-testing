@@ -1,3 +1,5 @@
+provider "cloudflare" {}
+
 data "cloudflare_api_token_permission_groups" "all" {}
 
 data "cloudflare_zone" "n3tuk" {

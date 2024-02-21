@@ -1,7 +1,3 @@
-# annotations:
-#   external-dns.alpha.kubernetes.io/target: <guid>.cfargotunnel.com
-#   external-dns.alpha.kubernetes.io/cloudflare-proxied: "true"
-
 resource "random_password" "tunnel" {
   length = 64
 }
