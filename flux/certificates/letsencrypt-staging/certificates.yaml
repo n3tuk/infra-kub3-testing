@@ -9,5 +9,5 @@ spec:
   dnsNames:
     - letsencrypt-test.kub3.uk
   issuerRef:
-    name: letsencrypt-cloudflare-test
+    name: letsencrypt-cloudflare-staging
     kind: ClusterIssuer
