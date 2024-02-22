@@ -1,0 +1,23 @@
+---
+replicaCount: 1
+
+adminUser:
+  create: true
+  createClusterRole: true
+  createSecret: false
+
+ingress:
+  enabled: true
+  className: nginx-internal
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-cloudflare-production
+    nginx.ingress.kubernetes.io/service-upstream: 'true'
+    nginx.ingress.kubernetes.io/upstream-vhost: gitops.flux-system.svc.cluster.local
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+networkPolicy:
+  create: false

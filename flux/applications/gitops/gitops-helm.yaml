@@ -2,16 +2,21 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: podinfo
+  name: gitops
+  namespace: flux-system
+  annotations:
+    metadata.weave.works/description: |
+      This is the Weave GitOps Dashboard. It provides a simple way to get
+      insights into your GitOps workloads.
 spec:
-  interval: 5m
+  interval: 1h
   chart:
     spec:
-      chart: podinfo
-      version: '~> 6.5.0'
+      chart: weave-gitops
+      version: '~> 4.0.36'
       sourceRef:
         kind: HelmRepository
-        name: podinfo
+        name: weaveworks
         namespace: flux-system
 
   install:
@@ -28,12 +33,12 @@ spec:
   dependsOn:
     - name: cert-manager
       namespace: certificates-system
-    - name: ingress-nginx-external
+    - name: ingress-nginx-internal
       namespace: ingress-system
 
   valuesFrom:
     - kind: ConfigMap
-      name: podinfo-values
+      name: gitops-values
     - kind: ConfigMap
-      name: podinfo-overrides
+      name: gitops-ingress
       optional: true
