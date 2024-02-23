@@ -40,7 +40,7 @@ resource "kubernetes_secret_v1" "flux_system_cluster_user_auth" {
   type = "Opaque"
 
   data = {
-    "username"     = "jonathanio"
-    "passwordHash" = random_password.gitops_admin.result
+    "username" = "jonathanio"
+    "password" = bcrypt(random_password.gitops_admin.result)
   }
 }
