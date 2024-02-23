@@ -9,3 +9,9 @@ variable "cloudflare_account_id" {
   type        = string
   default     = "e0d4aae3f32f077cd16bbc26f615738d"
 }
+
+variable "auth0_domain" {
+  description = "The Domain of the Auth0 account to connect OIDC authention with"
+  type        = string
+  default     = "n3tuk.uk.auth0.com"
+}

@@ -25,6 +25,7 @@ can be run:
 ```console
 $ set -x GITHUB_TOKEN xxx
 $ set -x CLOUDFLARE_TOKEN xxx
+$ set -x AUTH0_API_TOKEN xxx
 $ gcloud auth login
 ...
 You are now logged in as [jon@than.io].

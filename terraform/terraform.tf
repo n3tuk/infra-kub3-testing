@@ -14,6 +14,10 @@ terraform {
       source  = "integrations/github"
       version = "~> 5.45"
     }
+    auth0 = {
+      source  = "auth0/auth0"
+      version = "~> 1.1.2"
+    }
     kubernetes = {
       source  = "hashicorp/kubernetes"
       version = "~> 2.25.2"

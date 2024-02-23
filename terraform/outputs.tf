@@ -3,8 +3,8 @@ output "tls_flux_public_key" {
   value       = tls_private_key.flux.public_key_pem
 }
 
-output "gitops_admin_user_password" {
-  description = "The password for the admin User for GitOps"
-  value       = random_password.gitops_admin.result
+output "gitops_emergency_password" {
+  description = "The password for the emergency User for GitOps outside of OIDC configuration"
+  value       = random_password.gitops_emergency.result
   sensitive   = true
 }

@@ -16,7 +16,7 @@ ingress:
 
 envVars:
   - name: WEAVE_GITOPS_FEATURE_OIDC_BUTTON_LABEL
-    value: 'Login with Auth0'
+    value: 'Login with SSO'
 
 resources:
   requests:
