@@ -24,6 +24,8 @@ resource "kubernetes_config_map_v1" "flux_system_gitops_ingress" {
       }
     })
   }
+
+  depends_on = [flux_bootstrap_git.kub3]
 }
 
 # Configure the standard authentication with a custom Auth0 client (application)
@@ -97,6 +99,8 @@ resource "kubernetes_secret_v1" "flux_system_gitops_oidc" {
     "issuerURL"    = "https://${var.auth0_domain}/"
     "redirectURL"  = "https://${local.cluster}.gitops.pip3.uk/oauth2/callback"
   }
+
+  depends_on = [flux_bootstrap_git.kub3]
 }
 
 # Configure the emergency backup user in case there are OIDC issues with the
@@ -118,4 +122,6 @@ resource "kubernetes_secret_v1" "flux_system_cluster_user_auth" {
     "username" = "emergency"
     "password" = bcrypt(random_password.gitops_emergency.result)
   }
+
+  depends_on = [flux_bootstrap_git.kub3]
 }
