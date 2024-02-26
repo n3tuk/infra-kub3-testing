@@ -5,11 +5,13 @@ metadata:
   name: infrastructure
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: sources
   sourceRef:
     kind: GitRepository
     name: flux-system
-  interval: 1m
+    namespace: flux-system
   path: flux/infrastructure
+  interval: 1h
+  retryInterval: 2m
+  dependsOn:
+    - name: sources
   prune: true

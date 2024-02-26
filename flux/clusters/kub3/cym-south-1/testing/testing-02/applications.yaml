@@ -5,14 +5,15 @@ metadata:
   name: applications
   namespace: flux-system
 spec:
-  dependsOn:
-    - name: sources
-    - name: infrastructure
-    - name: certificates
   sourceRef:
     kind: GitRepository
     name: flux-system
-  interval: 1m
+    namespace: flux-system
   path: flux/applications
+  interval: 1h
+  retryInterval: 2m
+  dependsOn:
+    - name: infrastructure
+    - name: certificates
+    - name: permissions
   prune: true
-  validation: client
