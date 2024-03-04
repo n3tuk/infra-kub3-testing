@@ -1,0 +1,14 @@
+---
+replicaCount: 1
+
+imagePullSecrets: []
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+flags:
+  logLevel: debug
+  logFormat: json
+  updateStrategy: 'immediate'

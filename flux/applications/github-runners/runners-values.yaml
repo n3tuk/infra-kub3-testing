@@ -1,0 +1,10 @@
+---
+githubConfigUrl: https://github.com/n3tuk
+githubConfigSecret: runners-secret
+runnerGroup: default
+
+minRunners: 0
+maxRunners: 5
+
+containerMode:
+  type: dind

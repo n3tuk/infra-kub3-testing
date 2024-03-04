@@ -32,3 +32,11 @@ You are now logged in as [jon@than.io].
 Your current project is [project-name-here].  You can change this setting by running:
   $ gcloud config set project PROJECT_ID
 ```
+
+```console
+$ flux create secret oci ghcr-auth \
+    --url=ghcr.io \
+    --username={github-user} \
+    --password={github-pat}
+► oci secret 'ghcr-auth' created in 'flux-system' namespace
+```

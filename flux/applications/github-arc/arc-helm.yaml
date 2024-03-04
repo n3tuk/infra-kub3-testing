@@ -1,0 +1,42 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: github-arc
+  namespace: arc-system
+  annotations:
+    metadata.weave.works/description: |
+      Actions Runner Controller (ARC) is a Kubernetes operator that orchestrates
+      and scales self-hosted runners for GitHub Actions, allowing for runners
+      that automatically scale based on the number of workflows running in your
+      repository, organization, or enterprise.
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/created-by: github
+    app.kubernetes.io/name: github-arc-controller
+    app.kubernetes.io/part-of: github-arc
+spec:
+  interval: 1h
+  chart:
+    spec:
+      chart: gha-runner-scale-set-controller
+      version: 0.8.3
+      sourceRef:
+        kind: HelmRepository
+        name: github-arc
+        namespace: flux-system
+
+  install:
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  driftDetection:
+    mode: enabled
+
+  valuesFrom:
+    - kind: ConfigMap
+      name: arc-values

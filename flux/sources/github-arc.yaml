@@ -1,0 +1,21 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: github-arc
+  annotations:
+    metadata.weave.works/description: |
+      GitHub Actions Runner Controller (ARC) Helm Repository for scalable
+      self-hosted runners for GitHub Actions.
+  labels:
+    app.kubernetes.io/component: helm-charts
+    app.kubernetes.io/created-by: github
+    app.kubernetes.io/name: github-arc-oci
+    app.kubernetes.io/part-of: github-arc
+spec:
+  interval: 1h
+  type: oci
+  provider: generic
+  secretRef:
+    name: ghcr-auth
+  url: oci://ghcr.io/actions/actions-runner-controller-charts

@@ -10,3 +10,4 @@ resources:
   - metallb.yaml
   - podinfo.yaml
   - weaveworks.yaml
+  - github-arc.yaml

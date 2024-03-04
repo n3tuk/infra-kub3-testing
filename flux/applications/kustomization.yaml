@@ -4,3 +4,5 @@ kind: Kustomization
 resources:
   - podinfo
   - gitops
+  - github-arc
+  - github-runners
