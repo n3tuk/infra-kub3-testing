@@ -12,3 +12,4 @@ resources:
   - weaveworks.yaml
   - github-arc.yaml
   - aqua-security.yaml
+  - prometheus-community.yaml
