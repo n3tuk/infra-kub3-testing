@@ -11,3 +11,4 @@ resources:
   - podinfo.yaml
   - weaveworks.yaml
   - github-arc.yaml
+  - aqua-security.yaml
