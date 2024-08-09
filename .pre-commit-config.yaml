@@ -1,7 +1,7 @@
 ---
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks.git
-    rev: v4.5.0
+    rev: v4.6.0
     hooks:
       - id: check-merge-conflict
         name: Check for merge conflicts before committing
@@ -28,7 +28,7 @@ repos:
         types_or: [json, yaml, markdown]
 
   - repo: https://github.com/golangci/golangci-lint.git
-    rev: v1.55.2
+    rev: v1.59.1
     hooks:
       - id: golangci-lint-full
         name: Run Go linters across function/ source files
@@ -40,7 +40,7 @@ repos:
         entry: bash -c 'cd infra/ && golangci-lint run --fix --config=../.golangci.yaml --path-prefix=infra'
 
   - repo: https://github.com/python-jsonschema/check-jsonschema.git
-    rev: 0.27.4
+    rev: 0.29.1
     hooks:
       - id: check-dependabot
         name: Check the Dependabot configuration for correctness
