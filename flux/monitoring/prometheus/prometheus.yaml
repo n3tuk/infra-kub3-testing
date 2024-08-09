@@ -21,3 +21,4 @@ spec:
   serviceAccountName: prometheus
   version: v2.53.1
   serviceMonitorSelector: {}
+  serviceMonitorNamespaceSelector: {}
