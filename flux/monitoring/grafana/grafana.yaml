@@ -1,0 +1,77 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: grafana
+  namespace: grafana-system
+spec:
+  chart:
+    spec:
+      chart: grafana
+      version: '~> 8.4.2'
+      sourceRef:
+        kind: HelmRepository
+        name: grafana
+        namespace: flux-system
+      interval: 1m
+  interval: 5m
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+  test:
+    enable: true
+  values:
+    replicas: 1
+    podDisruptionBudget:
+      minAvailable: 1
+
+    deploymentStrategy:
+      type: RollingUpdate
+      maxSurge: 1
+
+    serviceMonitor:
+      enabled: true
+
+    ingress:
+      enabled: true
+      ingressClassName: nginx-internal
+      # Values can be templated
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-cloudflare-production
+        external-dns.alpha.kubernetes.io/hostname: grafana.${cluster_name}.t.cym-south-1.kub3.uk
+      hosts:
+        - grafana.${cluster_name}.t.cym-south-1.kub3.uk
+      tls:
+        - hosts:
+            - grafana.${cluster_name}.t.cym-south-1.kub3.uk
+          secretName: ingress-grafana-tls
+
+    admin:
+      existingSecret: grafana-admin
+      userKey: username
+      passwordKey: password
+
+    useStatefulSet: true
+    persistence:
+      enabled: true
+      storageClassName: local-path
+
+    datasources:
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+          - name: Prometheus
+            type: prometheus
+            url: http://prometheus.prometheus-system:9090
+            access: proxy
+            isDefault: true
+
+    imageRenderer:
+      deploymentStrategy:
+        type: RollingUpdate
+        maxUnavailable: 1
+      enabled: true
+      replicas: 1
+      serviceMonitor:
+        enabled: true
+        path: /metrics

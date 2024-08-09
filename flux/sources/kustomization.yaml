@@ -13,3 +13,4 @@ resources:
   - github-arc.yaml
   - aqua-security.yaml
   - prometheus-community.yaml
+  - grafana.yaml
