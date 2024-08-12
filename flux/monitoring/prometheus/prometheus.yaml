@@ -11,9 +11,20 @@ spec:
   nodeSelector:
     kubernetes.io/os: linux
   replicas: 2
+  # 7.5 days
+  retention: 180h
+  storage:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: local-path
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 128Gi
   resources:
     requests:
-      memory: 400Mi
+      memory: 512Mi
   securityContext:
     fsGroup: 2000
     runAsNonRoot: true
