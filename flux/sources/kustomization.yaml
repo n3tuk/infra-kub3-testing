@@ -14,3 +14,4 @@ resources:
   - aqua-security.yaml
   - prometheus-community.yaml
   - grafana.yaml
+  - kedacore.yaml

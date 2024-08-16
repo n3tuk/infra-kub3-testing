@@ -1,0 +1,80 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: keda
+  namespace: keda-system
+spec:
+  chart:
+    spec:
+      chart: keda
+      version: '~> 2.15.1'
+      sourceRef:
+        kind: HelmRepository
+        name: kedacore
+        namespace: flux-system
+      interval: 1m
+  interval: 5m
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+  test:
+    enable: true
+  values:
+    clusterName: ${cluster_name}
+
+    upgradeStrategy:
+      operator:
+        type: RollingUpdate
+        rollingUpdate:
+          maxSurge: 1
+      metricsApiServer:
+        type: RollingUpdate
+        rollingUpdate:
+          maxSurge: 1
+      webhooks:
+        type: RollingUpdate
+        rollingUpdate:
+          maxSurge: 1
+
+    podDisruptionBudget:
+      operator:
+        minAvailable: 1
+      metricServer:
+        minAvailable: 1
+      webhooks:
+        minAvailable: 1
+
+    logging:
+      operator:
+        format: json
+        timeEncoding: rfc3339nano
+      webhooks:
+        format: json
+        timeEncoding: rfc3339nano
+
+    prometheus:
+      operator:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+        prometheusRules:
+          enabled: true
+      metricServer:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+        prometheusRules:
+          enabled: true
+      webhooks:
+        enabled: true
+        serviceMonitor:
+          enabled: true
+        prometheusRules:
+          enabled: true
+
+    certificates:
+      certManager:
+        enabled: true
+        issuer:
+          generate: true
