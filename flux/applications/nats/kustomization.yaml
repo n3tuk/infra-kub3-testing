@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: app-nats
 resources:
   - namespace.yaml
+  - certificates.yaml
   - nats.yaml
 configMapGenerator:
   - name: nats-values

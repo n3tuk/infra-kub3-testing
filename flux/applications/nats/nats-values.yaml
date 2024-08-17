@@ -20,6 +20,16 @@ config:
       enabled: true
       maxSize: 128Mi
 
+  websocket:
+    enabled: true
+    port: 8080
+    ingress:
+      enabled: true
+      hosts:
+        - nats.${cluster_name}.${cluster_domain}
+      className: nginx-internal
+      tlsSecretName: nginx-internal-nats-tls
+
 promExporter:
   enabled: true
   podMonitor:
@@ -34,7 +44,7 @@ service:
     leafnodes:
       enabled: false
     websocket:
-      enabled: false
+      enabled: true
     mqtt:
       enabled: false
     cluster:
