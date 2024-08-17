@@ -6,3 +6,4 @@ resources:
   - gitops
   - github-arc
   - github-runners
+  - nats

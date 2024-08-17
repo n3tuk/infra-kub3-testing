@@ -1,0 +1,50 @@
+---
+config:
+  cluster:
+    enabled: true
+    replicas: 3
+
+  jetstream:
+    enabled: true
+
+    fileStore:
+      enabled: true
+      dir: /data
+
+      pvc:
+        enabled: true
+        size: 4Gi
+        storageClassName: local-path
+
+    memoryStore:
+      enabled: true
+      maxSize: 128Mi
+
+promExporter:
+  enabled: true
+  podMonitor:
+    enabled: true
+
+service:
+  enabled: true
+
+  ports:
+    nats:
+      enabled: true
+    leafnodes:
+      enabled: false
+    websocket:
+      enabled: false
+    mqtt:
+      enabled: false
+    cluster:
+      enabled: true
+    gateway:
+      enabled: false
+    monitor:
+      enabled: false
+    profiling:
+      enabled: false
+
+natsBox:
+  enabled: false
