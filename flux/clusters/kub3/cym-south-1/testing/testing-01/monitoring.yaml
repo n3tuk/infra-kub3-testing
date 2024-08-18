@@ -19,3 +19,4 @@ spec:
   postBuild:
     substitute:
       cluster_name: testing-01
+      cluster_domain: t.cym-south-1.kub3.uk

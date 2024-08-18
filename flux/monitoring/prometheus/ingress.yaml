@@ -6,9 +6,6 @@ metadata:
   namespace: prometheus-system
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-cloudflare-production
-    external-dns.alpha.kubernetes.io/hostname: prometheus.${cluster_name}.t.cym-south-1.kub3.uk
-    # nginx.ingress.kubernetes.io/auth-url: 'http://oauth2-proxy.tools.svc.cluster.local/oauth2/auth'
-    # nginx.ingress.kubernetes.io/auth-signin: 'http://auth.127.0.0.1.nip.io/oauth2/sign_in?rd=http://$host$request_uri'
 spec:
   ingressClassName: nginx-internal
   rules:
@@ -23,5 +20,5 @@ spec:
                   number: 9090
   tls:
     - hosts:
-        - prometheus.${cluster_name}.t.cym-south-1.kub3.uk
+        - prometheus.${cluster_name}.${cluster_domain}
       secretName: ingress-prometheus-tls

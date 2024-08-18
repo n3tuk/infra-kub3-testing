@@ -38,12 +38,11 @@ spec:
       # Values can be templated
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-cloudflare-production
-        external-dns.alpha.kubernetes.io/hostname: grafana.${cluster_name}.t.cym-south-1.kub3.uk
       hosts:
-        - grafana.${cluster_name}.t.cym-south-1.kub3.uk
+        - grafana.${cluster_name}.${cluster_domain}
       tls:
         - hosts:
-            - grafana.${cluster_name}.t.cym-south-1.kub3.uk
+            - grafana.${cluster_name}.${cluster_domain}
           secretName: ingress-grafana-tls
 
     admin:
