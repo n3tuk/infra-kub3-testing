@@ -5,4 +5,5 @@ resources:
   - kube-state-metrics
   - prometheus
   - grafana
+  - elasticsearch
   - keda

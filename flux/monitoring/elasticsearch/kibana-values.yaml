@@ -1,0 +1,24 @@
+---
+# Version of Kibana.
+version: 8.15.0
+
+spec:
+  count: 1
+  elasticsearchRef:
+    name: eck-elasticsearch
+  http:
+    service:
+      spec:
+        type: LoadBalancer
+
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-cloudflare-production
+  className: nginx-intenal
+  pathType: Prefix
+  hosts:
+    - host: kibana.${cluster_name}.${cluster_domain}
+      path: /
+  tls:
+    enabled: true

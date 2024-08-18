@@ -64,6 +64,11 @@ spec:
             url: http://prometheus.prometheus-system:9090
             access: proxy
             isDefault: true
+          - name: ElasticSearch
+            type: elasticsearch
+            url: http://elasticsearch.elastic-system:9090
+            access: proxy
+            isDefault: false
 
     imageRenderer:
       deploymentStrategy:

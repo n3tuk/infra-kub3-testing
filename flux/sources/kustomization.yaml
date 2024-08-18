@@ -16,3 +16,4 @@ resources:
   - grafana.yaml
   - kedacore.yaml
   - nats.yaml
+  - elastic.yaml

@@ -1,0 +1,18 @@
+---
+installCRDs: true
+replicaCount: 1
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+config:
+  metrics:
+    port: 8888
+    secureMode:
+      enabled: true

@@ -1,0 +1,28 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: elasticsearch
+  namespace: flux-system
+namespace: elastic-system
+resources:
+  - namespace.yaml
+  - eck-operator.yaml
+  - elasticsearch.yaml
+  - kibana.yaml
+configMapGenerator:
+  - name: helm-eck-operator-values
+    options:
+      disableNameSuffixHash: true
+    files:
+      - values.yaml=eck-operator-values.yaml
+  - name: helm-elasticsearch-values
+    options:
+      disableNameSuffixHash: true
+    files:
+      - values.yaml=elasticsearch-values.yaml
+  - name: helm-kibana-values
+    options:
+      disableNameSuffixHash: true
+    files:
+      - values.yaml=kibana-values.yaml
