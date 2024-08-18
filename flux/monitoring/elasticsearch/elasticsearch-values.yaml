@@ -37,6 +37,7 @@ nodeSets:
           resources:
             requests:
               storage: 32Gi
+          storageClassName: local-path
   - name: hot
     count: 2
     config:
@@ -60,6 +61,7 @@ nodeSets:
           resources:
             requests:
               storage: 32Gi
+          storageClassName: local-path
 
 ingress:
   enabled: true
