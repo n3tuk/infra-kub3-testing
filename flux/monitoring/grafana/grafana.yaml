@@ -67,7 +67,7 @@ spec:
             isDefault: true
           - name: ElasticSearch
             type: elasticsearch
-            url: http://elasticsearch.elastic-system:9090
+            url: https://elasticsearch-eck-elasticsearch-es-masters.elastic-system:9200
             access: proxy
             isDefault: false
 
