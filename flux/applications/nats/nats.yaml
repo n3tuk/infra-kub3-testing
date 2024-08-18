@@ -13,7 +13,6 @@ spec:
         kind: HelmRepository
         name: nats
         namespace: flux-system
-
   install:
     crds: CreateReplace
     remediation:

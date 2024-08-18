@@ -38,6 +38,7 @@ spec:
       # Values can be templated
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-cloudflare-production
+        external-dns.alpha.kubernetes.io/hostname: grafana.${cluster_name}.${cluster_domain}
       hosts:
         - grafana.${cluster_name}.${cluster_domain}
       tls:

@@ -15,6 +15,7 @@ ingress:
   enabled: true
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-cloudflare-production
+    external-dns.alpha.kubernetes.io/hostname: kibana.${cluster_name}.${cluster_domain}
   className: nginx-intenal
   pathType: Prefix
   hosts:

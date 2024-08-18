@@ -5,10 +5,10 @@ ingress:
   enabled: true
   className: nginx-external
   annotations:
-    nginx.ingress.kubernetes.io/service-upstream: 'true'
-    nginx.ingress.kubernetes.io/upstream-vhost: podinfo.app-podinfo.svc.cluster.local
+    external-dns.alpha.kubernetes.io/target: d996c5e4-11da-400a-a8b3-2a7d235675f0.cfargotunnel.com
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: 'true'
   hosts:
-    - host: podinfo-testing-01.t3st.uk
+    - host: podinfo-${cluster_name}.t3st.uk
       paths:
         - path: /
           pathType: ImplementationSpecific
