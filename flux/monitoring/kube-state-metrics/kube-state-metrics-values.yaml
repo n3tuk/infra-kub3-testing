@@ -1,0 +1,19 @@
+---
+prometheusScrape: true
+replicas: 1
+revisionHistoryLimit: 10
+
+rbac:
+  create: true
+  useClusterRole: true
+
+prometheus:
+  monitor:
+    enabled: true
+
+networkPolicy:
+  enabled: false
+  flavor: kubernetes
+
+selfMonitor:
+  enabled: true

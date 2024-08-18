@@ -1,5 +1,15 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+metadata:
+  name: kube-state-metrics
+  namespace: flux-system
+namespace: prometheus-system
 resources:
   - kube-state-metrics.yaml
+configMapGenerator:
+  - name: kube-state-metrics-values
+    options:
+      disableNameSuffixHash: true
+    files:
+      - values.yaml=kube-state-metrics-values.yaml
