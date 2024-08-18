@@ -25,7 +25,9 @@ spec:
     fullnameOverride: cloudflare-dns
     triggerLoopOnEvent: true
 
+    registry: txt
     txtOwnerId: kub3/cloudflare-dns
+    txtPrefix: '_%{record_type}.'
     domainFilters:
       - kub3.uk
       - pip3.uk
