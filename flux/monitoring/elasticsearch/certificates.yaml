@@ -1,0 +1,14 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: nginx-internal-elasticsearch-tls
+  namespace: elastic-system
+spec:
+  secretName: nginx-internal-elasticsearch-tls
+  dnsNames:
+    - elastic.${cluster_name}.${cluster_domain}
+    - kibana.${cluster_name}.${cluster_domain}
+  issuerRef:
+    name: letsencrypt-cloudflare-production
+    kind: ClusterIssuer
