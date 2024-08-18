@@ -6,10 +6,18 @@ spec:
   count: 1
   elasticsearchRef:
     name: eck-elasticsearch
+  config:
+    server:
+      publicBaseUrl: 'https://kibana.${cluster_name}.${cluster_domain}'
   http:
     service:
       spec:
         type: LoadBalancer
+nodeSets:
+  - name: default
+    count: 1
+    config:
+      node.store.allow_mmap: false
 
 ingress:
   enabled: true
