@@ -31,5 +31,7 @@ spec:
     runAsUser: 1000
   serviceAccountName: prometheus
   version: v2.53.1
+  podMonitorSelector: {}
+  podMonitorNamespaceSelector: {}
   serviceMonitorSelector: {}
   serviceMonitorNamespaceSelector: {}
