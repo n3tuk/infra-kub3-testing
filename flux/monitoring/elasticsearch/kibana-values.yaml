@@ -5,7 +5,7 @@ version: 8.15.0
 spec:
   count: 1
   elasticsearchRef:
-    name: eck-elasticsearch
+    name: elasticsearch-eck-elasticsearch
   config:
     server:
       publicBaseUrl: 'https://kibana.${cluster_name}.${cluster_domain}'
