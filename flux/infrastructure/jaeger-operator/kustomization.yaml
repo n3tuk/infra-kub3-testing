@@ -1,7 +1,17 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-namespace: jager-system
+metadata:
+  name: jaeger-operator
+  namespace: flux-system
+namespace: jaeger-system
 resources:
   - namespace.yaml
+  - jaeger-crds.yaml
   - jaeger-operator.yaml
+configMapGenerator:
+  - name: helm-jaeger-operator-values
+    options:
+      disableNameSuffixHash: true
+    files:
+      - values.yaml=jaeger-operator-values.yaml

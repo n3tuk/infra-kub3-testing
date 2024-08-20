@@ -1,0 +1,13 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: ingress-nginx-internal-jaeger-tls
+  namespace: elastic-system
+spec:
+  secretName: ingress-nginx-internal-jaeger-tls
+  dnsNames:
+    - jaeger.${cluster_name}.${cluster_domain}
+  issuerRef:
+    name: letsencrypt-cloudflare-production
+    kind: ClusterIssuer

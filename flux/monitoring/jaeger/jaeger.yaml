@@ -1,0 +1,43 @@
+---
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: jaeger
+  namespace: jaeger-system
+spec:
+  ingress:
+    enabled: true
+    ingressClassName: nginx-internal
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-cloudflare-production
+      external-dns.alpha.kubernetes.io/hostname: jaeger.${cluster_name}.${cluster_domain}
+      nginx.ingress.kubernetes.io/backend-protocol: 'HTTPS'
+    hosts:
+      - jaeger.${cluster_name}.${cluster_domain}
+    pathType: Prefix
+    tls:
+      - hosts:
+          - jaeger.${cluster_name}.${cluster_domain}
+        secretName: ingress-nginx-internal-jaeger-tls
+  storage:
+    type: elasticsearch
+    options:
+      es:
+        server-urls: http://elasticsearch-eck-elasicsearch.elastic-default.svc:9200
+  collector:
+    strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 1
+  ingester:
+    strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 1
+  query:
+    strategy:
+      type: RollingUpdate
+      rollingUpdate:
+        maxSurge: 1
+    options:
+      base-path: /

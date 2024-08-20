@@ -17,3 +17,4 @@ resources:
   - kedacore.yaml
   - nats.yaml
   - elastic.yaml
+  - jaeger.yaml
